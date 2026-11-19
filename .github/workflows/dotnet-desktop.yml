@@ -1,0 +1,47 @@
+
+name: PEDINHIOS FPS BOOST PRO - Build EXE
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Windows x64
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore PEDINHIOS.FPSBoost.csproj
+
+      - name: Build and publish EXE
+        run: >
+          dotnet publish PEDINHIOS.FPSBoost.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -o publish
+
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PEDINHIOS-FPS-BOOST-PRO
+          path: publish/
+          if-no-files-found: error
+          retention-days: 30
