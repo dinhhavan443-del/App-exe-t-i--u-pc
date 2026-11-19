@@ -5,11 +5,17 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
     <AssemblyName>PEDINHIOS.FPSBoost</AssemblyName>
     <RootNamespace>PEDINHIOS.FPSBoost</RootNamespace>
     <Version>1.0.0</Version>
+
+    <!-- Tu dong yeu cau quyen Administrator -->
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+
   </PropertyGroup>
 
 </Project>
